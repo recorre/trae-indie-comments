@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indie Comments - Demonstração</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3f7;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --card-bg: #fff;
+            --border-color: #e0e0e0;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .article {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .article h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .article p {
+            margin-bottom: 15px;
+        }
+        
+        .article-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comments-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .cta {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Indie Comments</h1>
+            <p class="tagline">Sistema de comentários privacy-first para seu site</p>
+        </header>
+        
+        <main>
+            <article class="article">
+                <div class="article-meta">
+                    <span>Publicado em: 15 de Agosto de 2023</span>
+                    <span>Autor: Equipe Indie Comments</span>
+                </div>
+                
+                <h2>Por que escolher um sistema de comentários independente?</h2>
+                
+                <p>
+                    Na era digital atual, a interação com os visitantes do seu site é crucial para construir uma comunidade engajada. 
+                    Sistemas de comentários são uma ferramenta essencial para permitir essa interação, mas muitas soluções populares 
+                    vêm com um custo: a privacidade dos seus usuários.
+                </p>
+                
+                <p>
+                    O Indie Comments foi criado com um propósito claro: oferecer uma alternativa que respeita a privacidade dos 
+                    usuários enquanto proporciona todas as funcionalidades que você espera de um sistema de comentários moderno.
+                </p>
+                
+                <p>
+                    Ao contrário de outras soluções que rastreiam os usuários através de múltiplos sites, o Indie Comments 
+                    mantém os dados dos seus visitantes exclusivamente no seu domínio. Não há rastreamento entre sites, 
+                    não há venda de dados, apenas uma experiência de comentários limpa e eficiente.
+                </p>
+                
+                <p>
+                    Além disso, nossa solução é leve e rápida, não comprometendo o desempenho do seu site. O widget de 
+                    comentários carrega rapidamente e não adiciona scripts de rastreamento desnecessários que poderiam 
+                    diminuir a velocidade da sua página.
+                </p>
+                
+                <p>
+                    Se você valoriza a privacidade dos seus usuários e deseja uma solução de comentários que seja 
+                    ao mesmo tempo poderosa e ética, o Indie Comments é a escolha certa para o seu site.
+                </p>
+            </article>
+            
+            <section class="comments-section">
+                <h3>Comentários</h3>
+                
+                <!-- O widget de comentários será inserido aqui -->
+                <div id="indie-comments"></div>
+            </section>
+            
+            <div class="cta">
+                <a href="/painel" class="btn">Experimente o Indie Comments</a>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2023 Indie Comments. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+    
+    <!-- Carregando o widget de comentários -->
+    <script src="/widget/indie_comments.js"></script>
+    <script>
+        // Inicializar o widget quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', () => {
+            // Normalmente, você usaria seu próprio siteId e apiKey
+            // Para esta demonstração, usamos valores de exemplo
+            IndieComments.init({
+                container: '#indie-comments',
+                siteId: 'demo-site',
+                apiKey: 'demo-api-key'
+            });
+        });
+    </script>
+</body>
+</html>

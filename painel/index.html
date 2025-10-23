@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel - Indie Comments</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header class="app-header">
+            <h1>Indie Comments</h1>
+            <div id="user-info" class="hidden">
+                <span id="user-name"></span>
+                <button id="logout-btn" class="outline">Sair</button>
+            </div>
+        </header>
+
+        <!-- Seção de Login/Registro -->
+        <section id="auth-section">
+            <div class="auth-container">
+                <div class="tabs">
+                    <button id="login-tab" class="active">Login</button>
+                    <button id="signup-tab">Cadastro</button>
+                </div>
+                
+                <!-- Formulário de Login -->
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Senha</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="primary">Entrar</button>
+                    <p id="login-error" class="error-message"></p>
+                </form>
+                
+                <!-- Formulário de Cadastro -->
+                <form id="signup-form" class="auth-form hidden">
+                    <div class="form-group">
+                        <label for="signup-name">Nome</label>
+                        <input type="text" id="signup-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Senha</label>
+                        <input type="password" id="signup-password" required minlength="6">
+                    </div>
+                    <button type="submit" class="primary">Cadastrar</button>
+                    <p id="signup-error" class="error-message"></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- Painel Principal -->
+        <main id="dashboard-section" class="hidden">
+            <div class="dashboard-header">
+                <h2>Painel de Controle</h2>
+                <div class="plan-info">
+                    <span>Plano: <strong id="user-plan">Free</strong></span>
+                    <button id="upgrade-btn" class="outline small">Upgrade</button>
+                </div>
+            </div>
+
+            <!-- Abas do Painel -->
+            <div class="dashboard-tabs">
+                <button id="sites-tab" class="active">Meus Sites</button>
+                <button id="comments-tab">Comentários</button>
+                <button id="settings-tab">Configurações</button>
+            </div>
+
+            <!-- Conteúdo: Sites -->
+            <div id="sites-content" class="tab-content">
+                <div class="action-bar">
+                    <button id="add-site-btn" class="primary">Adicionar Site</button>
+                </div>
+                
+                <div id="sites-list" class="cards-container">
+                    <!-- Sites serão adicionados aqui dinamicamente -->
+                    <p id="no-sites-message">Você ainda não tem sites cadastrados.</p>
+                </div>
+                
+                <!-- Modal: Adicionar Site -->
+                <div id="add-site-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h3>Adicionar Novo Site</h3>
+                        <form id="add-site-form">
+                            <div class="form-group">
+                                <label for="site-name">Nome do Site</label>
+                                <input type="text" id="site-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="site-domain">Domínio</label>
+                                <input type="text" id="site-domain" placeholder="exemplo.com" required>
+                            </div>
+                            <button type="submit" class="primary">Adicionar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conteúdo: Comentários -->
+            <div id="comments-content" class="tab-content hidden">
+                <div class="filter-bar">
+                    <select id="site-filter">
+                        <option value="">Todos os sites</option>
+                    </select>
+                    <select id="status-filter">
+                        <option value="">Todos os status</option>
+                        <option value="pending">Pendentes</option>
+                        <option value="approved">Aprovados</option>
+                        <option value="rejected">Rejeitados</option>
+                    </select>
+                </div>
+                
+                <div id="comments-list" class="list-container">
+                    <!-- Comentários serão adicionados aqui dinamicamente -->
+                    <p id="no-comments-message">Nenhum comentário encontrado.</p>
+                </div>
+            </div>
+
+            <!-- Conteúdo: Configurações -->
+            <div id="settings-content" class="tab-content hidden">
+                <h3>Configurações da Conta</h3>
+                <form id="settings-form">
+                    <div class="form-group">
+                        <label for="settings-name">Nome</label>
+                        <input type="text" id="settings-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="settings-email">Email</label>
+                        <input type="email" id="settings-email" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="settings-password">Nova Senha</label>
+                        <input type="password" id="settings-password" placeholder="Deixe em branco para manter a atual">
+                    </div>
+                    <button type="submit" class="primary">Salvar Alterações</button>
+                </form>
+                
+                <div class="danger-zone">
+                    <h4>Zona de Perigo</h4>
+                    <button id="delete-account-btn" class="outline danger">Excluir Conta</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modal: Upgrade de Plano -->
+        <div id="upgrade-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Upgrade de Plano</h3>
+                
+                <div class="plans-container">
+                    <div class="plan-card">
+                        <h4>Free</h4>
+                        <p class="price">R$ 0/mês</p>
+                        <ul>
+                            <li>1 site</li>
+                            <li>Moderação básica</li>
+                            <li>Suporte por email</li>
+                        </ul>
+                        <button class="outline" disabled>Plano Atual</button>
+                    </div>
+                    
+                    <div class="plan-card featured">
+                        <h4>Supporter</h4>
+                        <p class="price">R$ 6/mês</p>
+                        <ul>
+                            <li>Até 3 sites</li>
+                            <li>Moderação avançada</li>
+                            <li>Suporte prioritário</li>
+                            <li>Estatísticas básicas</li>
+                        </ul>
+                        <button class="primary">Fazer Upgrade</button>
+                    </div>
+                </div>
+                
+                <p class="note">Nota: Esta é uma versão de demonstração. O sistema de pagamento não está implementado.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Indie Comments. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
